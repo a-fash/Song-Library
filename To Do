@@ -1,0 +1,7 @@
+Seperate Controller and Song Library classes
+  Controller should have a song library object and just fx objexts
+  Song Library should be where the songs are stored and implement needed functions for adding,editing, etc.
+  
+Add actually song file storage and playability
+  Add new field to song class which holds the location of mp3 file
+  Add new buttons to controller and songlistfxml for adding mp3 file location and playability
