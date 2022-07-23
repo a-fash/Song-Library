@@ -71,9 +71,22 @@ public class SongLib {
 		return library.get(findSong(name, artist));
 	}
 	
-	public void addSong(Song s) {
+	public int addSong(Song s) {
 
+		String identifier = s.primaryKey();
+		
+		for(int i = 0; i < library.size(); i++) {
+					
+			if(identifier.compareTo(library.get(i).primaryKey()) < 0) {
+				
+				library.add(i, s);
+				return i;
+			}
+		}
+		
 		library.add(s);
+		
+		return library.size();
 	}
 	
 	public void addSong(String name, String artist, String album, int year) {

@@ -102,7 +102,8 @@ public class Controller {
 		
 		for(int i = 0; i < songLibrary.size(); i++) {
 			
-			Song s = songLibrary.get(i);
+			Song s = library.getSong(i);
+			//Song s = songLibrary.get(i);
 			writer.write(s.getName() + ";" + s.getArtist() + ";" + s.getAlbum() + ";" + String.valueOf(s.getYear()) + "\n");
 		}
 		
@@ -265,10 +266,13 @@ public class Controller {
 		
 		listIndex = addSongToList(name, artist);
 		
-		if(year.equals("")) 
-			libraryIndex = addSongToLibrary(new Song(name, artist, album, 0));
-		else
-			libraryIndex = addSongToLibrary(new Song(name, artist, album, Integer.parseInt(year)));
+		if(year.equals("")) {
+			libraryIndex = library.addSong(new Song(name, artist, album, 0));
+			//libraryIndex = addSongToLibrary(new Song(name, artist, album, 0));
+		} else {
+			libraryIndex = library.addSong(new Song(name, artist, album, Integer.parseInt(year)));
+			//libraryIndex = addSongToLibrary(new Song(name, artist, album, Integer.parseInt(year)));
+		}
 		
 		listView.setDisable(false);
 		
