@@ -12,7 +12,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import view.Controller;
 
-public class SongLib extends Application {
+public class Runner extends Application {
 	
 	public void start(Stage primaryStage) 
 	throws IOException {

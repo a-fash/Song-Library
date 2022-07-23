@@ -11,6 +11,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import app.Song;
+import app.SongLib;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -43,6 +44,7 @@ public class Controller {
 	
 	private ObservableList<String> obsList;
 	private ArrayList<Song> songLibrary = new ArrayList<Song>();
+	private SongLib library = new SongLib();
 
 	public void start(Stage mainStage) throws IOException { 
 		
@@ -50,7 +52,11 @@ public class Controller {
 		setVisibleTopButtons(true);	
 		setVisibleBottomButtons(false);
 		
-		createLibraryFromFile(file);
+		library.createLibraryFromFile(file);
+		//createLibraryFromFile(file);
+		
+		updateObservableList();
+		
 		listView.setItems(obsList); 
 		
 		// select and show the first item
@@ -109,15 +115,29 @@ public class Controller {
 		obsList = FXCollections.observableArrayList();
 		String name, artist;
 		
+		for(int i = 0; i < library.getSize(); i++) {
+			
+			name = library.getSong(i).getName();
+			artist = library.getSong(i).getArtist();
+			obsList.add(name + " - " + artist);
+		}
+		
+		/*
+		obsList = FXCollections.observableArrayList();
+		String name, artist;
+		
 		for(int i = 0; i < songLibrary.size(); i++) {
 			
 			name = songLibrary.get(i).getName();
 			artist = songLibrary.get(i).getArtist();
 			obsList.add(name + " - " + artist);
 		}
+		*/
 	}
 	
 	public void showItem() {     
+		
+		
 		
 		String item = listView.getSelectionModel().getSelectedItem();
 		
@@ -133,7 +153,8 @@ public class Controller {
 		String name = item.substring(0, item.indexOf('-')-1);
 		String artist = item.substring(item.indexOf('-')+2);
 		
-		Song s = getSongFromLibrary(name, artist);
+		Song s = library.getSong(name, artist);
+		//Song s = getSongFromLibrary(name, artist);
 		
 		errorMessage.setText("");
 		
