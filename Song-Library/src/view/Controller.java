@@ -306,7 +306,6 @@ public class Controller {
 	
 	public void delete(ActionEvent e) {
 
-		
 		String item, name, artist;
 		
 		item = listView.getSelectionModel().getSelectedItem();
@@ -319,7 +318,8 @@ public class Controller {
 		artist = item.substring(item.indexOf('-')+2);
 		
 		deleteSongInList(name, artist);
-		deleteSongInLibrary(name, artist);
+		library.deleteSong(name, artist);
+		//deleteSongInLibrary(name, artist);
 		
 		listView.setItems(obsList);
 		
@@ -392,10 +392,14 @@ public class Controller {
 				newName, 
 				newArtist);
 		
-		if(newYear.equals(""))
-			editSongInLibrary(name, artist, newName, newArtist, newAlbum,0);
-		else
-			editSongInLibrary(name, artist, newName, newArtist, newAlbum, Integer.parseInt(newYear));
+		if(newYear.equals("")) {
+			library.editSong(name, artist, newName, newArtist, newAlbum,0);
+			//editSongInLibrary(name, artist, newName, newArtist, newAlbum,0);
+
+		} else {
+			library.editSong(name, artist, newName, newArtist, newAlbum, Integer.parseInt(newYear));
+			//editSongInLibrary(name, artist, newName, newArtist, newAlbum, Integer.parseInt(newYear));
+		}
 		
 		listView.setItems(obsList);
 		listView.getSelectionModel().select(findSongInList(name, artist));
