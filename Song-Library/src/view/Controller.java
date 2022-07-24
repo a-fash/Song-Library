@@ -244,25 +244,26 @@ public class Controller {
 			errorMessage.setText("");
 		}
 		
-		listIndex = addSongToList(name, artist);
-		
 		if(year.equals(""))
 			libraryIndex = library.addSong(new Song(name, artist, album, 0));
 		else
 			libraryIndex = library.addSong(new Song(name, artist, album, Integer.parseInt(year)));
 		
+		updateObservableList();
 		listView.setDisable(false);
 		
 		setTextFieldsEditable(false);
 		setVisibleTopButtons(true);
 		setVisibleBottomButtons(false);
 		
+		/*
 		if(listIndex == libraryIndex) {
 			listView.getSelectionModel().select(findSongInList(name, artist));
 			showItem();
 		} else {
 			System.out.println("Error: song added to list and library at different locations");
 		}
+		*/
 	}
 	
 	public void lockFields(ActionEvent e) {
@@ -431,24 +432,6 @@ public class Controller {
 		}
 		
 		return false;
-	}
-
-	public int addSongToList(String name, String artist) {
-		
-		String s = (name + " - " + artist);
-		
-		for(int i = 0; i < obsList.size(); i++) {
-			
-			if(s.toLowerCase().compareTo(obsList.get(i).toLowerCase()) < 0) {
-				
-				obsList.add(i, s);
-				return i;
-			}
-		}
-		
-		obsList.add(s);
-		
-		return obsList.size();
 	}
 	
 	public void editSongInList(String name, String artist, String newName, String newArtist) {
