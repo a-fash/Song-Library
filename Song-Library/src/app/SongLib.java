@@ -94,7 +94,7 @@ public class SongLib {
 		library.add(new Song(name, artist, album, year));
 	}
 	
-public void editSong(String name, String artist, String newName, String newArtist) {
+	public void editSong(String name, String artist, String newName, String newArtist) {
 		
 		int index = findSong(name, artist);
 		

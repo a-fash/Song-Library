@@ -43,7 +43,6 @@ public class Controller {
 	
 	
 	private ObservableList<String> obsList;
-	private ArrayList<Song> songLibrary = new ArrayList<Song>();
 	private SongLib library = new SongLib();
 
 	public void start(Stage mainStage) throws IOException { 
@@ -71,40 +70,14 @@ public class Controller {
 	
 	public void createLibraryFromFile(File f) throws IOException {
 		
-		BufferedReader br = new BufferedReader(new FileReader(f)); 
-		  
-		  String st, name, artist, album;
-		  int year;
-		  while ((st = br.readLine()) != null) {
-			  name = st.substring(0, st.indexOf(";"));
-			  st = st.substring(st.indexOf(";") + 1);
-			  artist = st.substring(0, st.indexOf(";"));
-			  st = st.substring(st.indexOf(";") + 1);
-			  album = st.substring(0, st.indexOf(";"));
-			  st = st.substring(st.indexOf(";") + 1);
-			  year = Integer.parseInt(st.substring(0));
-			  songLibrary.add(new Song(name, artist, album, year));
-		  }
-		  
-		  br.close();
-			
-		  updateObservableList();
+		library.createLibraryFromFile(f);
+		
+		updateObservableList();
 	}
 	
 	public void createFileFromLibrary() throws FileNotFoundException {
 		
-		PrintWriter writer = new PrintWriter(file);
-		writer.print("");
-		
-		
-		for(int i = 0; i < songLibrary.size(); i++) {
-			
-			Song s = library.getSong(i);
-			writer.write(s.getName() + ";" + s.getArtist() + ";" + s.getAlbum() + ";" + String.valueOf(s.getYear()) + "\n");
-		}
-		
-		writer.close();
-		
+		library.createFileFromLibrary();	
 	}
 	
 	public void updateObservableList() {
@@ -215,7 +188,6 @@ public class Controller {
 	public void addSong(ActionEvent e) {
 		
 		String name, artist, album, year;
-		int listIndex, libraryIndex;
 		
 		name = currentName.getText().trim();
 		artist = currentArtist.getText().trim();
@@ -245,9 +217,9 @@ public class Controller {
 		}
 		
 		if(year.equals(""))
-			libraryIndex = library.addSong(new Song(name, artist, album, 0));
+			library.addSong(new Song(name, artist, album, 0));
 		else
-			libraryIndex = library.addSong(new Song(name, artist, album, Integer.parseInt(year)));
+			library.addSong(new Song(name, artist, album, Integer.parseInt(year)));
 		
 		updateObservableList();
 		listView.setDisable(false);
@@ -255,15 +227,6 @@ public class Controller {
 		setTextFieldsEditable(false);
 		setVisibleTopButtons(true);
 		setVisibleBottomButtons(false);
-		
-		/*
-		if(listIndex == libraryIndex) {
-			listView.getSelectionModel().select(findSongInList(name, artist));
-			showItem();
-		} else {
-			System.out.println("Error: song added to list and library at different locations");
-		}
-		*/
 	}
 	
 	public void lockFields(ActionEvent e) {
@@ -370,7 +333,10 @@ public class Controller {
 			library.editSong(name, artist, newName, newArtist, newAlbum, Integer.parseInt(newYear));
 		
 		listView.setItems(obsList);
-		listView.getSelectionModel().select(findSongInList(name, artist));
+		listView.getSelectionModel().select(library.findSong(newName, newArtist));
+		System.out.println(library.findSong(name, artist));
+		System.out.println(findSongInList(name, artist));
+		//listView.getSelectionModel().select(findSongInList(name, artist));
 		showItem();
 		
 		listView.setDisable(false);
