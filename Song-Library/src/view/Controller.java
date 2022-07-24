@@ -458,7 +458,15 @@ public class Controller {
 			errorMessage.setText(errorMessage.getText() + text);
 			return true;
 		}
-
+		
+		/*
+		if(!checkUniqueSong(name, artist)) {
+			text = "Error: song already exists in library\nPlease enter a unique song name and artist\n";
+			errorMessage.setFill(Color.RED);
+			errorMessage.setText(errorMessage.getText() + text);
+			return true;
+		}
+		*/
 		return false;
 	}
 	
@@ -542,67 +550,6 @@ public class Controller {
 		}
 		
 		return -1;
-	}
-	
-	public Song getSongFromLibrary(String name, String artist) {
-
-		return songLibrary.get(findSongInLibrary(name, artist));
-	}
-
-	public int findSongInLibrary(String name, String artist) {
-		
-		String songName, songArtist;
-		
-		for(int i = 0; i < songLibrary.size(); i++) {
-			
-			songName = songLibrary.get(i).getName().toLowerCase();
-			songArtist = songLibrary.get(i).getArtist().toLowerCase();
-			
-			if(name.toLowerCase().equals(songName) && artist.toLowerCase().equals(songArtist)) {
-				return i;
-			}
-		}
-		
-		return -1;
-	}
-	
-	public int addSongToLibrary(Song s) {
-		
-		String identifier = s.primaryKey();
-		
-		for(int i = 0; i < songLibrary.size(); i++) {
-					
-			if(identifier.compareTo(songLibrary.get(i).primaryKey()) < 0) {
-				
-				songLibrary.add(i, s);
-				return i;
-			}
-		}
-		
-		songLibrary.add(s);
-		
-		return songLibrary.size();
-	}
-	
-	public void editSongInLibrary(String name, String artist, String newName, String newArtist, String newAlbum, int newYear) {
-		
-		int index = findSongInLibrary(name, artist);
-		
-		songLibrary.get(index).setName(newName);
-		songLibrary.get(index).setArtist(newArtist);
-		songLibrary.get(index).setAlbum(newAlbum);
-		songLibrary.get(index).setYear(newYear);
-		
-		return;
-	}
-	
-	public void deleteSongInLibrary(String name, String artist) {
-		
-		int index = findSongInLibrary(name, artist);
-		
-		songLibrary.remove(index);
-		
-		return;
 	}
 	
 	public void sortLibrary() {
