@@ -294,8 +294,8 @@ public class Controller {
 		name = item.substring(0, item.indexOf('-')-1);
 		artist = item.substring(item.indexOf('-')+2);
 		
-		deleteSongInList(name, artist);
 		library.deleteSong(name, artist);
+		updateObservableList();
 		
 		listView.setItems(obsList);
 		
@@ -439,15 +439,6 @@ public class Controller {
 		int index = findSongInList(name, artist);
 		
 		obsList.set(index, newName + " - " + newArtist);
-		
-		return;
-	}
-	
-	public void deleteSongInList(String name, String artist) {
-		
-		int index = findSongInList(name, artist);
-		
-		obsList.remove(index, index+1);
 		
 		return;
 	}
