@@ -94,6 +94,16 @@ public class SongLib {
 		library.add(new Song(name, artist, album, year));
 	}
 	
+public void editSong(String name, String artist, String newName, String newArtist) {
+		
+		int index = findSong(name, artist);
+		
+		library.get(index).setName(newName);
+		library.get(index).setArtist(newArtist);
+		
+		return;
+	}
+	
 	public void editSong(String name, String artist, String newName, String newArtist, String newAlbum, int newYear) {
 		
 		int index = findSong(name, artist);

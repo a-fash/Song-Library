@@ -362,11 +362,7 @@ public class Controller {
 			}
 		}
 		
-		editSongInList(
-				name,
-				artist, 
-				newName, 
-				newArtist);
+		library.editSong(name, artist, newName, newArtist);
 		
 		if(newYear.equals(""))
 			library.editSong(name, artist, newName, newArtist, newAlbum,0);
@@ -432,15 +428,6 @@ public class Controller {
 		}
 		
 		return false;
-	}
-	
-	public void editSongInList(String name, String artist, String newName, String newArtist) {
-		
-		int index = findSongInList(name, artist);
-		
-		obsList.set(index, newName + " - " + newArtist);
-		
-		return;
 	}
 	
 	public int findSongInList(String name, String artist) {
