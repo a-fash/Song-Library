@@ -53,13 +53,10 @@ public class Controller {
 		setVisibleBottomButtons(false);
 		
 		library.createLibraryFromFile(file);
-		//createLibraryFromFile(file);
 		
 		updateObservableList();
 		
 		listView.setItems(obsList); 
-		
-		// select and show the first item
 		listView.getSelectionModel().select(0);
 		showItem();
 
@@ -103,7 +100,6 @@ public class Controller {
 		for(int i = 0; i < songLibrary.size(); i++) {
 			
 			Song s = library.getSong(i);
-			//Song s = songLibrary.get(i);
 			writer.write(s.getName() + ";" + s.getArtist() + ";" + s.getAlbum() + ";" + String.valueOf(s.getYear()) + "\n");
 		}
 		
@@ -122,23 +118,9 @@ public class Controller {
 			artist = library.getSong(i).getArtist();
 			obsList.add(name + " - " + artist);
 		}
-		
-		/*
-		obsList = FXCollections.observableArrayList();
-		String name, artist;
-		
-		for(int i = 0; i < songLibrary.size(); i++) {
-			
-			name = songLibrary.get(i).getName();
-			artist = songLibrary.get(i).getArtist();
-			obsList.add(name + " - " + artist);
-		}
-		*/
 	}
 	
 	public void showItem() {     
-		
-		
 		
 		String item = listView.getSelectionModel().getSelectedItem();
 		
@@ -155,7 +137,6 @@ public class Controller {
 		String artist = item.substring(item.indexOf('-')+2);
 		
 		Song s = library.getSong(name, artist);
-		//Song s = getSongFromLibrary(name, artist);
 		
 		errorMessage.setText("");
 		
@@ -266,13 +247,10 @@ public class Controller {
 		
 		listIndex = addSongToList(name, artist);
 		
-		if(year.equals("")) {
+		if(year.equals(""))
 			libraryIndex = library.addSong(new Song(name, artist, album, 0));
-			//libraryIndex = addSongToLibrary(new Song(name, artist, album, 0));
-		} else {
+		else
 			libraryIndex = library.addSong(new Song(name, artist, album, Integer.parseInt(year)));
-			//libraryIndex = addSongToLibrary(new Song(name, artist, album, Integer.parseInt(year)));
-		}
 		
 		listView.setDisable(false);
 		
@@ -284,7 +262,6 @@ public class Controller {
 			listView.getSelectionModel().select(findSongInList(name, artist));
 			showItem();
 		} else {
-			
 			System.out.println("Error: song added to list and library at different locations");
 		}
 	}
@@ -319,7 +296,6 @@ public class Controller {
 		
 		deleteSongInList(name, artist);
 		library.deleteSong(name, artist);
-		//deleteSongInLibrary(name, artist);
 		
 		listView.setItems(obsList);
 		
@@ -392,14 +368,10 @@ public class Controller {
 				newName, 
 				newArtist);
 		
-		if(newYear.equals("")) {
+		if(newYear.equals(""))
 			library.editSong(name, artist, newName, newArtist, newAlbum,0);
-			//editSongInLibrary(name, artist, newName, newArtist, newAlbum,0);
-
-		} else {
+		else
 			library.editSong(name, artist, newName, newArtist, newAlbum, Integer.parseInt(newYear));
-			//editSongInLibrary(name, artist, newName, newArtist, newAlbum, Integer.parseInt(newYear));
-		}
 		
 		listView.setItems(obsList);
 		listView.getSelectionModel().select(findSongInList(name, artist));
@@ -459,20 +431,12 @@ public class Controller {
 			return true;
 		}
 		
-		/*
-		if(!checkUniqueSong(name, artist)) {
-			text = "Error: song already exists in library\nPlease enter a unique song name and artist\n";
-			errorMessage.setFill(Color.RED);
-			errorMessage.setText(errorMessage.getText() + text);
-			return true;
-		}
-		*/
 		return false;
 	}
 	
 	public boolean checkUniqueSong(String name, String artist) {
 		
-		return findSongInList(name, artist) == -1 && findSongInLibrary(name, artist) == -1;
+		return findSongInList(name, artist) == -1 && library.findSong(name, artist) == -1;
 	}
 	
 	public boolean checkYear(String year) {
@@ -518,9 +482,6 @@ public class Controller {
 		int index = findSongInList(name, artist);
 		
 		obsList.set(index, newName + " - " + newArtist);
-		
-		//obsList.remove(index, index);
-		//obsList.add(newName + "-" + newArtist);
 		
 		return;
 	}
