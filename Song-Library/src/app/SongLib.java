@@ -159,4 +159,34 @@ public class SongLib {
 		return -1;
 	}
 	
+	//checks if name and artist are unique in list
+	//returns true if song is unique, else false
+	public boolean uniqueSong(String name, String artist) {
+		
+		return !(findSong(name, artist) == -1);
+	}
+	
+	//checks if year entered is formated properly
+	//returns true if no year is entered or if a 4 digit string is entered
+	//returns false if 4 digits are not entered
+	public boolean checkYear(String year) {
+		
+		if(year.equals("")) {
+			return true;
+		}
+		
+		if(year.length() != 4) {
+			return false;
+		}
+		
+		for(int i = 0; i < year.length(); i++) {
+			char c = year.charAt(i);
+			if( !(c >= '0' && c <= '9')) {
+				return false;
+			}
+		}
+		
+		return true;
+	}
+	
 }

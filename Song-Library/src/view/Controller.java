@@ -229,16 +229,15 @@ public class Controller {
 			return;
 		}
 		
-		if((!checkUniqueSong(name, artist) || !checkYear(year))) {
+		if((!library.uniqueSong(name, artist) || !library.checkYear(year))) {
 			errorMessage.setText("");
 			
-			if(!checkUniqueSong(name, artist)) {
+			if(library.uniqueSong(name, artist))
 				uniqueSongErrorHandler(name, artist);
-			}
 		
-			if(!checkYear(year)) {	
+			if(library.checkYear(year))
 				yearErrorHandler(year);
-			}
+			
 			return;
 		} else {
 			
@@ -410,7 +409,7 @@ public class Controller {
 		
 		String text = "";
 		
-		if(!checkYear(year)) {	
+		if(!library.checkYear(year)) {	
 			text = "Error: please enter a proper year\nPlease enter a proper year 'YYYY'\n";
 			errorMessage.setFill(Color.RED);
 			errorMessage.setText(errorMessage.getText() + text);
@@ -424,7 +423,7 @@ public class Controller {
 		
 		String text = "";
 		
-		if(!checkUniqueSong(name, artist)) {
+		if(!library.uniqueSong(name, artist)) {
 			text = "Error: song already exists in library\nPlease enter a unique song name and artist\n";
 			errorMessage.setFill(Color.RED);
 			errorMessage.setText(errorMessage.getText() + text);
@@ -432,31 +431,6 @@ public class Controller {
 		}
 		
 		return false;
-	}
-	
-	public boolean checkUniqueSong(String name, String artist) {
-		
-		return findSongInList(name, artist) == -1 && library.findSong(name, artist) == -1;
-	}
-	
-	public boolean checkYear(String year) {
-		
-		if(year.equals("")) {
-			return true;
-		}
-		
-		if(year.length() != 4) {
-			return false;
-		}
-		
-		for(int i = 0; i < year.length(); i++) {
-			char c = year.charAt(i);
-			if( !(c >= '0' && c <= '9')) {
-				return false;
-			}
-		}
-		
-		return true;
 	}
 
 	public int addSongToList(String name, String artist) {
