@@ -326,7 +326,9 @@ public class Controller {
 		else
 			library.editSong(name, artist, newName, newArtist, newAlbum, Integer.parseInt(newYear));
 		
-		listView.setItems(obsList);
+		updateObservableList();
+		
+		//listView.setItems(obsList);
 		listView.getSelectionModel().select(library.findSong(newName, newArtist));
 		showItem();
 		

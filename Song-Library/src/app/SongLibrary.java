@@ -25,7 +25,6 @@ public class SongLibrary {
 	public void createLibraryFromFile(File f) throws IOException {
 		
 		loc = new File(f.toString());
-		System.out.println(loc.toString());
 		BufferedReader br = new BufferedReader(new FileReader(loc)); 
 		  
 		String st, name, artist, album;
@@ -93,9 +92,11 @@ public class SongLibrary {
 		return library.size();
 	}
 	
-	public void addSong(String name, String artist, String album, int year) {
+	public int addSong(String name, String artist, String album, int year) {
 
 		library.add(new Song(name, artist, album, year));
+		
+		return library.size();
 	}
 	
 	public void editSong(String name, String artist, String newName, String newArtist) {
@@ -178,7 +179,6 @@ public class SongLibrary {
 	//returns true if song is unique, else false
 	public boolean uniqueSong(String name, String artist) {
 		
-		System.out.println(findSong(name, artist) == -1);
 		return findSong(name, artist) == -1;
 	}
 	
