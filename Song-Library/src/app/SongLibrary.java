@@ -8,20 +8,24 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
-import javafx.scene.paint.Color;
-
 //Andrew Fash
 
 
-public class SongLib {
+public class SongLibrary {
 	
 	ArrayList<Song> library;
 	File loc;
 	//File file = new File(System.getProperty("user.dir") + "/src/songList.txt"); 
+
+	public SongLibrary() {
+		
+		this.library = new ArrayList<Song>();
+	}
 	
 	public void createLibraryFromFile(File f) throws IOException {
 		
 		loc = new File(f.toString());
+		System.out.println(loc.toString());
 		BufferedReader br = new BufferedReader(new FileReader(loc)); 
 		  
 		String st, name, artist, album;
@@ -34,6 +38,7 @@ public class SongLib {
 			album = st.substring(0, st.indexOf(";"));
 			st = st.substring(st.indexOf(";") + 1);
 			year = Integer.parseInt(st.substring(0));
+			System.out.println(name + " " + artist + " " + album + " " + year);
 			library.add(new Song(name, artist, album, year));
 		}
 		  

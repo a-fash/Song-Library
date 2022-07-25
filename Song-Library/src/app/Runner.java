@@ -14,14 +14,13 @@ import view.Controller;
 
 public class Runner extends Application {
 	
-	public void start(Stage primaryStage) 
-	throws IOException {
+	public void start(Stage primaryStage) throws IOException {
+
 		FXMLLoader loader = new FXMLLoader();   
 		loader.setLocation(
 				getClass().getResource("/view/songList.fxml"));
 		AnchorPane root = (AnchorPane)loader.load();
-
-
+				
 		Controller controller = loader.getController();
 		controller.start(primaryStage);
 

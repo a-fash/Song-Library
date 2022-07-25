@@ -2,16 +2,12 @@ package view;
 
 //Andrew Fash
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
 
 import app.Song;
-import app.SongLib;
+import app.SongLibrary;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -43,7 +39,7 @@ public class Controller {
 	
 	
 	private ObservableList<String> obsList;
-	private SongLib library = new SongLib();
+	private SongLibrary library = new SongLibrary();
 
 	public void start(Stage mainStage) throws IOException { 
 		
@@ -52,7 +48,6 @@ public class Controller {
 		setVisibleBottomButtons(false);
 		
 		library.createLibraryFromFile(file);
-		
 		updateObservableList();
 		
 		listView.setItems(obsList); 
