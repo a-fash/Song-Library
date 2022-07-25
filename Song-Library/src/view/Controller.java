@@ -20,9 +20,7 @@ import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
 public class Controller {
-	
-	File file = new File(System.getProperty("user.dir") + "/src/songList.txt"); 
-	
+		
 	@FXML private ListView<String> listView;
 	@FXML TextField currentName;
 	@FXML TextField currentArtist;
@@ -37,7 +35,7 @@ public class Controller {
 	@FXML Button updateButton;
 	@FXML Button areYouSureButton;
 	
-	
+	File file = new File(System.getProperty("user.dir") + "/src/songList.txt"); 
 	private ObservableList<String> obsList;
 	private SongLibrary library = new SongLibrary();
 
@@ -389,23 +387,6 @@ public class Controller {
 		return false;
 	}
 	
-	public int findSongInList(String name, String artist) {
-		
-		String item, songName, songArtist;
-		
-		for(int i = 0; i < obsList.size(); i++) {
-			
-			item = obsList.get(i);
-			songName = item.substring(0, item.indexOf('-')-1).toLowerCase();
-			songArtist = item.substring(item.indexOf('-')+2).toLowerCase();
-			
-			if(name.toLowerCase().equals(songName) && artist.toLowerCase().equals(songArtist)) {
-				return i;
-			}
-		}
-		
-		return -1;
-	}
 	
 	public void sortLibrary() {
 		
