@@ -14,6 +14,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.scene.control.Button;
@@ -26,6 +27,7 @@ public class Controller {
 	@FXML TextField currentArtist;
 	@FXML TextField currentAlbum;
 	@FXML TextField currentYear;
+	@FXML TextField songLink;
 	@FXML Text errorMessage;
 	@FXML Button editButton;
 	@FXML Button deleteButton;
@@ -34,6 +36,7 @@ public class Controller {
 	@FXML Button cancelButton;
 	@FXML Button updateButton;
 	@FXML Button areYouSureButton;
+	@FXML Button playSongButton;
 	
 	File file = new File(System.getProperty("user.dir") + "/src/songList.txt"); 
 	private ObservableList<String> obsList;
@@ -355,6 +358,13 @@ public class Controller {
 		setVisibleBottomButtons(false);
 	}
 	
+	public void playSong(ActionEvent e) {
+		
+		
+		//MediaPlayer mediaPlayer = new MediaPlayer();
+
+	}
+
 	public boolean yearErrorHandler(String year) {
 		
 		String text = "";
