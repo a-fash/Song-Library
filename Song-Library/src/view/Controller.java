@@ -61,13 +61,6 @@ public class Controller {
 						showItem());
 	}
 	
-	public void createLibraryFromFile(File f) throws IOException {
-		
-		library.createLibraryFromFile(f);
-		
-		updateObservableList();
-	}
-	
 	public void createFileFromLibrary() throws FileNotFoundException {
 		
 		library.createFileFromLibrary();	
