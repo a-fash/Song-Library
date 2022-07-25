@@ -38,7 +38,6 @@ public class SongLibrary {
 			album = st.substring(0, st.indexOf(";"));
 			st = st.substring(st.indexOf(";") + 1);
 			year = Integer.parseInt(st.substring(0));
-			System.out.println(name + " " + artist + " " + album + " " + year);
 			library.add(new Song(name, artist, album, year));
 		}
 		  
@@ -139,7 +138,7 @@ public class SongLibrary {
 		return;
 	}
 	
-	//returns place of song
+	//returns index of song in library. returns -1 if song is not in library
 	public int findSong(Song s) {
 		
 		String n, a;
@@ -157,6 +156,7 @@ public class SongLibrary {
 		return -1;
 	}
 	
+	//returns index of song in library. returns -1 if song is not in library
 	public int findSong(String name, String artist) {
 	
 		String n, a;
@@ -178,7 +178,8 @@ public class SongLibrary {
 	//returns true if song is unique, else false
 	public boolean uniqueSong(String name, String artist) {
 		
-		return !(findSong(name, artist) == -1);
+		System.out.println(findSong(name, artist) == -1);
+		return findSong(name, artist) == -1;
 	}
 	
 	//checks if year entered is formated properly

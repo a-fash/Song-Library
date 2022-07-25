@@ -86,6 +86,8 @@ public class Controller {
 			artist = library.getSong(i).getArtist();
 			obsList.add(name + " - " + artist);
 		}
+		
+		listView.setItems(obsList); 
 	}
 	
 	public void showItem() {     
@@ -195,14 +197,14 @@ public class Controller {
 			errorMessage.setFill(Color.RED);
 			return;
 		}
-		
+				
 		if((!library.uniqueSong(name, artist) || !library.checkYear(year))) {
 			errorMessage.setText("");
 			
-			if(library.uniqueSong(name, artist))
+			if(!library.uniqueSong(name, artist))
 				uniqueSongErrorHandler(name, artist);
 		
-			if(library.checkYear(year))
+			if(!library.checkYear(year))
 				yearErrorHandler(year);
 			
 			return;
@@ -217,8 +219,9 @@ public class Controller {
 			library.addSong(new Song(name, artist, album, Integer.parseInt(year)));
 		
 		updateObservableList();
-		listView.setDisable(false);
+		listView.getSelectionModel().select(library.findSong(name, artist));
 		
+		listView.setDisable(false);
 		setTextFieldsEditable(false);
 		setVisibleTopButtons(true);
 		setVisibleBottomButtons(false);
@@ -319,9 +322,7 @@ public class Controller {
 				return;
 			}
 		}
-		
-		library.editSong(name, artist, newName, newArtist);
-		
+				
 		if(newYear.equals(""))
 			library.editSong(name, artist, newName, newArtist, newAlbum,0);
 		else
@@ -329,9 +330,6 @@ public class Controller {
 		
 		listView.setItems(obsList);
 		listView.getSelectionModel().select(library.findSong(newName, newArtist));
-		System.out.println(library.findSong(name, artist));
-		System.out.println(findSongInList(name, artist));
-		//listView.getSelectionModel().select(findSongInList(name, artist));
 		showItem();
 		
 		listView.setDisable(false);
