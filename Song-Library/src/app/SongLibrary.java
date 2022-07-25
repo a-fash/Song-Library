@@ -141,16 +141,14 @@ public class SongLibrary {
 	//returns index of song in library. returns -1 if song is not in library
 	public int findSong(Song s) {
 		
-		String n, a;
+		String p;
 		
 		for(int i = 0; i < library.size(); i++) {
 			
-			n = library.get(i).getName().toLowerCase();
-			a = library.get(i).getArtist().toLowerCase();
+			p = library.get(i).primaryKey();
 			
-			if(s.getName().toLowerCase().equals(n) && s.getArtist().toLowerCase().equals(a)) {
+			if(s.primaryKey().equals(p))
 				return i;
-			}
 		}
 		
 		return -1;
@@ -159,16 +157,14 @@ public class SongLibrary {
 	//returns index of song in library. returns -1 if song is not in library
 	public int findSong(String name, String artist) {
 	
-		String n, a;
+		String p;
 		
 		for(int i = 0; i < library.size(); i++) {
 			
-			n = library.get(i).getName().toLowerCase();
-			a = library.get(i).getArtist().toLowerCase();
+			p = library.get(i).primaryKey();
 			
-			if(name.toLowerCase().equals(n) && artist.toLowerCase().equals(a)) {
+			if(p.equals(name.trim().toLowerCase() + artist.trim().toLowerCase()))
 				return i;
-			}
 		}
 		
 		return -1;

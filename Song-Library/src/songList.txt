@@ -1,5 +1,7 @@
 2009;Mac Miller;Swimming;2018
 A Thousand Bad Times;Post Malone;Hollywood's Bleeding;2019
+asdf;asdf;;0
+asdf;asdfqwer;;0
 Bad News;Kanye West;808's and Heartbreak;2008
 Better Now;Post Malone;beerbongs & bently's;2018
 Blame Game;Kanye West;My Beautiful Dark Twisted Fantasy;2010
