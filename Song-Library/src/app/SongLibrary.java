@@ -15,16 +15,15 @@ public class SongLibrary {
 	
 	ArrayList<Song> library;
 	File loc;
-	//File file = new File(System.getProperty("user.dir") + "/src/songList.txt"); 
 
-	public SongLibrary() {
+	public SongLibrary(File f) {
 		
+		this.loc = new File(f.toString());
 		this.library = new ArrayList<Song>();
 	}
 	
-	public void createLibraryFromFile(File f) throws IOException {
+	public void createLibraryFromFile() throws IOException {
 		
-		loc = new File(f.toString());
 		BufferedReader br = new BufferedReader(new FileReader(loc)); 
 		  
 		String st, name, artist, album;

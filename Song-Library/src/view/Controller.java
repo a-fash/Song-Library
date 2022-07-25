@@ -37,7 +37,7 @@ public class Controller {
 	
 	File file = new File(System.getProperty("user.dir") + "/src/songList.txt"); 
 	private ObservableList<String> obsList;
-	private SongLibrary library = new SongLibrary();
+	private SongLibrary library;
 
 	public void start(Stage mainStage) throws IOException { 
 		
@@ -45,9 +45,10 @@ public class Controller {
 		setVisibleTopButtons(true);	
 		setVisibleBottomButtons(false);
 		
-		library.createLibraryFromFile(file);
-		updateObservableList();
+		library = new SongLibrary(file);
+		library.createLibraryFromFile();
 		
+		updateObservableList();
 		listView.setItems(obsList); 
 		listView.getSelectionModel().select(0);
 		showItem();
